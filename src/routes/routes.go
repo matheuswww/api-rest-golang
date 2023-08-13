@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/virussv/api-rest-golang/controller"
+	"github.com/virussv/api-rest-golang/src/controller"
 )
 
 func InitRouter(r *gin.RouterGroup) {

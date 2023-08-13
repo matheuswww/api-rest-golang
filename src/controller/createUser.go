@@ -4,10 +4,10 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/virussv/api-rest-golang/configuration/logger"
-	"github.com/virussv/api-rest-golang/configuration/validation"
-	"github.com/virussv/api-rest-golang/model/request"
-	"github.com/virussv/api-rest-golang/model/response"
+	"github.com/virussv/api-rest-golang/src/configuration/logger"
+	"github.com/virussv/api-rest-golang/src/configuration/validation"
+	"github.com/virussv/api-rest-golang/src/controller/model/request"
+	"github.com/virussv/api-rest-golang/src/controller/model/response"
 	"go.uber.org/zap"
 )
 

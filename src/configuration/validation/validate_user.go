@@ -9,7 +9,7 @@ import (
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
 	en_translation "github.com/go-playground/validator/v10/translations/en"
-	"github.com/virussv/api-rest-golang/configuration/rest_err"
+	"github.com/virussv/api-rest-golang/src/configuration/rest_err"
 )
 
 var (

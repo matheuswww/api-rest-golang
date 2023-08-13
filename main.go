@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/virussv/api-rest-golang/configuration/logger"
-	"github.com/virussv/api-rest-golang/routes"
+	"github.com/virussv/api-rest-golang/src/configuration/logger"
+	"github.com/virussv/api-rest-golang/src/routes"
 )
 
 func main() {
