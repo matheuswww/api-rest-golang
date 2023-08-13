@@ -1,4 +1,4 @@
-package request
+package response
 
 type UserResponse struct {
 	ID string `json:"id"`
