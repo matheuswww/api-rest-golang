@@ -7,11 +7,12 @@ import (
 	"github.com/virussv/api-rest-golang/src/configuration/logger"
 	"github.com/virussv/api-rest-golang/src/configuration/validation"
 	"github.com/virussv/api-rest-golang/src/controller/model/request"
-	"github.com/virussv/api-rest-golang/src/controller/model/response"
+	"github.com/virussv/api-rest-golang/src/model"
+	"github.com/virussv/api-rest-golang/src/view"
 	"go.uber.org/zap"
 )
 
-func CreateUser(c *gin.Context) {
+func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	logger.Info("Init CreateUser controller",
 	zap.String("journey","createuser"),
 )
@@ -22,14 +23,22 @@ func CreateUser(c *gin.Context) {
 		c.JSON(restErr.Code,restErr)
 		return
 	}
-	response := response.UserResponse  {
-		Email: userRequest.Email,
-		ID: "Test",
-		Name: userRequest.Name,
-		Age: userRequest.Age,
+
+	domain := model.NewUserDomain(
+		userRequest.Email,
+		userRequest.Name,
+		userRequest.Password,
+		userRequest.Age,
+	)
+
+	if err := uc.service.CreateUser(domain);err != nil {
+		c.JSON(err.Code,err)
 	}
+
 	logger.Info("User created succesfully",
 	zap.String("journey","createuser"),
 )
-	c.JSON(http.StatusOK,response)
+	c.JSON(http.StatusOK,view.ConvertDomainToResponse(
+		domain,
+	))
 }
