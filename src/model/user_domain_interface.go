@@ -3,14 +3,20 @@ package model
 type UserDomainInterface interface {
 	GetEmail() string
 	GetPassword() string
-	GetAge() int8
+	GetAge() uint8
 	GetName() string
+	GetId() uint
+	SetId(id uint)
 
 	EncryptPassword()
 }
 
-func NewUserDomain(email,password,name string,age int8) *userDomain {
+func NewUserDomain(email,password,name string,age uint8,id uint) *userDomain {
 	return &userDomain{
-		email,password,name,age,
+		email: email,
+		password: password,
+		name: name,
+		age: age,
+		id: id,
 	}
 }

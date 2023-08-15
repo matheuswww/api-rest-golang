@@ -4,7 +4,8 @@ type userDomain struct {
 	email string
 	password string
 	name string
-	age int8
+	age uint8
+	id uint
 }
 
 func (ud *userDomain) GetEmail() string{
@@ -16,6 +17,12 @@ func (ud *userDomain) GetPassword() string {
 func (ud *userDomain) GetName() string{
 	return ud.name
 }
-func (ud *userDomain) GetAge() int8{
+func (ud *userDomain) GetAge() uint8{
 	return ud.age
+}
+func (ud *userDomain) GetId() uint {
+	return ud.id
+}
+func (ud *userDomain) SetId(id uint) {
+	ud.id = id 
 }

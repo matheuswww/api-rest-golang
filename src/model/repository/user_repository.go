@@ -19,4 +19,5 @@ type userRepository struct {
 
 type UserRepository interface {
 	CreateUser(userDomain model.UserDomainInterface) (model.UserDomainInterface,*rest_err.RestErr)
+	FindUser(queryType string,value string) (model.UserDomainInterface,*rest_err.RestErr)
 }	

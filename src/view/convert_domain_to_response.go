@@ -10,5 +10,6 @@ func ConvertDomainToResponse(userDomain model.UserDomainInterface) response.User
 		Name: userDomain.GetName(),
 		Email: userDomain.GetEmail(),
 		Age: userDomain.GetAge(),
+		Id: userDomain.GetId(),
 	}
 }

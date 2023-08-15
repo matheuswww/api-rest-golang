@@ -29,6 +29,7 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 		userRequest.Name,
 		userRequest.Password,
 		userRequest.Age,
+		0,
 	)
 	domainResult,err := uc.service.CreateUser(domain)
 	if err != nil {
@@ -45,6 +46,6 @@ func (uc *userControllerInterface) CreateUser(c *gin.Context) {
 	zap.String("journey","createuser"),
 )
 	c.JSON(http.StatusOK,view.ConvertDomainToResponse(
-		domain,
+		domainResult,
 	))
 }
