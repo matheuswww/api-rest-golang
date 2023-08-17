@@ -7,9 +7,6 @@ import (
 	"go.uber.org/zap"
 )
 
-
-
-
 func (ud *userDomainService) FindUser(queryType string,value string) (model.UserDomainInterface,*rest_err.RestErr) {
 	logger.Info("Init find user model",zap.String("journey","FindUser"))
 	

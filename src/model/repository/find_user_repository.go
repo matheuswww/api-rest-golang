@@ -13,7 +13,7 @@ import (
 )
 
 func (us *userRepository) FindUser(queryType string,value string) (model.UserDomainInterface,*rest_err.RestErr) {
-	logger.Info("Init findUserByEmail repository",zap.String("journey","FindeUserByEmail"))
+	logger.Info("Init findUserByEmail repository",zap.String("journey","FindUserByEmail"))
 
 	db,err := mysql.NewMysqlConnection()
 	if err != nil {
@@ -56,6 +56,6 @@ func (us *userRepository) FindUser(queryType string,value string) (model.UserDom
 		uint8(age[0]),
 		id,
 	)
-	logger.Info("USER FINDED BY EMAIL")
+	logger.Info("USER FINDED BY EMAIL",zap.String("journey","FindUser"))
 	return user,nil
 }
