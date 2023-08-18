@@ -9,12 +9,19 @@ import (
 
 func (ud *userDomainService) FindUser(queryType string,value string) (model.UserDomainInterface,*rest_err.RestErr) {
 	logger.Info("Init find user model",zap.String("journey","FindUser"))
-	
 	userDomainRepository,err := ud.userRepository.FindUser(queryType,value)
 	if err != nil {
 		logger.Error("Init find user model",err,zap.String("journey","FindeUsers"))
 		return nil,err
 	}
-
 	return userDomainRepository,nil
+}
+
+func (ud *userDomainService) findUserByEmailAndPassword(email string,password string) (model.UserDomainInterface,*rest_err.RestErr) {
+	user,err := ud.userRepository.FindUserByEmailAndPassword(email,password)
+	if err != nil {
+		logger.Error("Init find user model",err,zap.String("journey","findUserByEmailAndPassword"))
+		return nil,err
+	}
+	return user,nil
 }

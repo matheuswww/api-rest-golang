@@ -59,3 +59,37 @@ func (us *userRepository) FindUser(queryType string,value string) (model.UserDom
 	logger.Info("USER FINDED BY EMAIL",zap.String("journey","FindUser"))
 	return user,nil
 }
+
+
+func (us *userRepository) FindUserByEmailAndPassword(email,password string) (model.UserDomainInterface,*rest_err.RestErr) {
+	logger.Info("Init findUserByEmailAndPassword repository",zap.String("journey","findUserByEmailAndPassword"))
+
+	db,err := mysql.NewMysqlConnection()
+	if err != nil {
+		return nil, rest_err.NewInternalServerError("database error")
+	}
+	defer db.Close()
+
+	var retrievedEmail,retrievedPassword,name string
+	var id uint 
+	var age uint8
+	query := "SELECT email,password,name,age,id FROM users WHERE email = ? AND password = ?"
+	row := db.QueryRow(query,email,password)
+	err = row.Scan(&retrievedEmail,&retrievedPassword,&name,&age,&id)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil,rest_err.NewNotFoundError("User not found")
+		}
+		logger.Error("Error trying to find user",err,zap.String("journey","findUserByEmailAndPassword"))
+		return nil,rest_err.NewInternalServerError("Database error")
+	}
+	user := model.NewUserDomain(
+		retrievedEmail,
+		retrievedPassword,
+		name,
+		age,
+		id,
+	)
+	logger.Info("USER FINDED BY EMAIL AND PASSWORD",zap.String("journey","FindUser"))
+	return user,nil
+}

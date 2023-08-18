@@ -13,7 +13,7 @@ func NewUserControllerInterface (serviceInterface service.UserDomainService) Use
 
 type UserControllerInterface interface {
 	FindUser(c *gin.Context)
-
+	LoginUser(c *gin.Context)
 	CreateUser(c *gin.Context)
 	DeleteUser(c *gin.Context)
 	UpdateUser(c *gin.Context)
