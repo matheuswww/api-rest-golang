@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"errors"
 	"github.com/virussv/api-rest-golang/src/configuration/database/mysql"
 	"github.com/virussv/api-rest-golang/src/configuration/logger"
 	"github.com/virussv/api-rest-golang/src/configuration/rest_err"
@@ -16,18 +17,17 @@ func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (
 		return nil, rest_err.NewInternalServerError("database error")
 	}
 	defer db.Close()
-	query := "SELECT email from users WHERE email = ?"
-	result,err := db.Exec(query,userDomain.GetEmail()) 
-	if err != nil {
+	searchRes,searchErr := ur.FindUser("email",userDomain.GetEmail())
+	if searchRes != nil { 
+		logger.Error("Error trying to create user",errors.New("duplicated email"),zap.String("journey","createUser"))
+		return nil,rest_err.NewConflictError("email already in use")
+	}
+	if searchErr != nil && searchRes != nil {
 		logger.Error("Error trying to create user",err,zap.String("journey","createUser"))
-		return nil, rest_err.NewInternalServerError("database error")
+		return nil,searchErr
 	}
-	if result != nil {
-		logger.Error("Error duplicated email",err,zap.String("journey","createUser"))
-		return nil,rest_err.NewConflictError("email already exists")
-	}
-	query = "INSERT INTO users (email,password,name,age) VALUES (?, ?, ?, ?)"
-	result,err = db.Exec(query,userDomain.GetEmail(),userDomain.GetPassword(),userDomain.GetName(),userDomain.GetAge())
+	query := "INSERT INTO users (email,password,name,age) VALUES (?, ?, ?, ?)"
+	result,err := db.Exec(query,userDomain.GetEmail(),userDomain.GetPassword(),userDomain.GetName(),userDomain.GetAge())
 	if err != nil {
 		logger.Error("Error trying to create user",err,zap.String("journey","createUser"))
 		return nil, rest_err.NewInternalServerError("database error")
