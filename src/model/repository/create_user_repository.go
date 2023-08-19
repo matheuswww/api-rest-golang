@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"github.com/virussv/api-rest-golang/src/configuration/database/mysql"
 	"github.com/virussv/api-rest-golang/src/configuration/logger"
 	"github.com/virussv/api-rest-golang/src/configuration/rest_err"
 	"github.com/virussv/api-rest-golang/src/model"
@@ -12,18 +11,14 @@ import (
 func (ur *userRepository) CreateUser(userDomain model.UserDomainInterface) (
 	model.UserDomainInterface,*rest_err.RestErr) {
 	logger.Info("Init createUser repository",zap.String("journey","createUser"))
-	db,err := mysql.NewMysqlConnection()
-	if err != nil {
-		return nil, rest_err.NewInternalServerError("database error")
-	}
-	defer db.Close()
+	db := ur.databaseConnection
 	searchRes,searchErr := ur.FindUser("email",userDomain.GetEmail())
 	if searchRes != nil { 
 		logger.Error("Error trying to create user",errors.New("duplicated email"),zap.String("journey","createUser"))
 		return nil,rest_err.NewConflictError("email already in use")
 	}
 	if searchErr != nil && searchRes != nil {
-		logger.Error("Error trying to create user",err,zap.String("journey","createUser"))
+		logger.Error("Error trying to create user",searchErr,zap.String("journey","createUser"))
 		return nil,searchErr
 	}
 	query := "INSERT INTO users (email,password,name,age) VALUES (?, ?, ?, ?)"

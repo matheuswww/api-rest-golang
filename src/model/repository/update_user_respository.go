@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"github.com/virussv/api-rest-golang/src/configuration/database/mysql"
 	"github.com/virussv/api-rest-golang/src/configuration/logger"
 	"github.com/virussv/api-rest-golang/src/configuration/rest_err"
 	"github.com/virussv/api-rest-golang/src/model"
@@ -12,10 +11,7 @@ func (ur *userRepository) UpdateUser(userId string,userDomain model.UserDomainIn
 	) (
 	*rest_err.RestErr) {
 	logger.Info("Init UpdateUser repository",zap.String("journey","UpdateUser"))
-	db,err := mysql.NewMysqlConnection()
-	if err != nil {
-		return rest_err.NewInternalServerError("database error")
-	}
+	db := ur.databaseConnection
 	defer db.Close()
 	query := `UPDATE users SET 
 			name = CASE WHEN ? <> '' THEN ? ELSE name END,

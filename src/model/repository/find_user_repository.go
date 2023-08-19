@@ -12,14 +12,10 @@ import (
 	"go.uber.org/zap"
 )
 
-func (us *userRepository) FindUser(queryType string,value string) (model.UserDomainInterface,*rest_err.RestErr) {
+func (ur *userRepository) FindUser(queryType string,value string) (model.UserDomainInterface,*rest_err.RestErr) {
 	logger.Info("Init findUserByEmail repository",zap.String("journey","FindUserByEmail"))
 
-	db,err := mysql.NewMysqlConnection()
-	if err != nil {
-		return nil, rest_err.NewInternalServerError("database error")
-	}
-	defer db.Close()
+	db := ur.databaseConnection
 	var row *sql.Row
 	switch queryType  {
 		case "id":
@@ -41,7 +37,7 @@ func (us *userRepository) FindUser(queryType string,value string) (model.UserDom
 	var retrievedEmail,name,password string
 	var age []uint8
 	var id uint
-	err = row.Scan(&retrievedEmail,&name,&age,&password,&id)
+	err := row.Scan(&retrievedEmail,&name,&age,&password,&id)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil,rest_err.NewNotFoundError("User not found")
