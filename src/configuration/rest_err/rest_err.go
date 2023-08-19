@@ -76,3 +76,11 @@ func NewConflictError(message string) *RestErr {
 		Code: http.StatusConflict,
 	}
 }
+
+func NewUnauthorizedError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err: "unauthorized",
+		Code: http.StatusUnauthorized,
+	}
+}

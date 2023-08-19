@@ -1,5 +1,7 @@
 package model
 
+import "github.com/virussv/api-rest-golang/src/configuration/rest_err"
+
 type UserDomainInterface interface {
 	GetEmail() string
 	GetPassword() string
@@ -9,6 +11,7 @@ type UserDomainInterface interface {
 	SetId(id uint)
 
 	EncryptPassword()
+	GenerateToken() (string,*rest_err.RestErr)
 }
 
 func NewUserDomain(email,password,name string,age uint8,id uint) *userDomain {

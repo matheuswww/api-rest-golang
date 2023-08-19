@@ -2,7 +2,6 @@ package controller
 
 import (
 	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/virussv/api-rest-golang/src/configuration/logger"
 	"github.com/virussv/api-rest-golang/src/configuration/validation"
@@ -17,6 +16,7 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 	zap.String("journey","loginUser"),
 )
 	var userRequest request.UserLogin;
+
 	if err := c.ShouldBindJSON(&userRequest);err != nil {
 		logger.Error("Error trying to validate user info",err)
 		restErr := validation.ValidateUserError(err)
@@ -29,7 +29,7 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 		userRequest.Password,
 		0,
 	)
-	domainResult,err := uc.service.LoginUserServices(domain)
+	domainResult,token,err := uc.service.LoginUserServices(domain)
 	if err != nil {
 		logger.Error(
 			"Error trying to call loginUser service",
@@ -42,7 +42,10 @@ func (uc *userControllerInterface) LoginUser(c *gin.Context) {
 	logger.Info("User created succesfully",
 	zap.String("userId",domainResult.GetEmail()),
 	zap.String("journey","loginUser"),
-)
+	)
+
+	c.Header("Authorization",token)
+
 	c.JSON(http.StatusOK,view.ConvertDomainToResponse(
 		domainResult,
 	))
