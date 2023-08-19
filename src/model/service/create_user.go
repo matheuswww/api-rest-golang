@@ -16,7 +16,7 @@ func (ud *userDomainService) CreateUser(
 
 	userDomainRepository,err := ud.userRepository.CreateUser(userDomain)
 	if err != nil {
-		logger.Error("Init createUser model",err,zap.String("jouney","createUser"))
+		logger.Error("error trying create user model",err,zap.String("jouney","createUser"))
 		return nil,err
 	}
 

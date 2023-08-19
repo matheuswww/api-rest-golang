@@ -11,7 +11,7 @@ func (ud *userDomainService) DeleteUser(id string) (*rest_err.RestErr) {
 
 	err := ud.userRepository.DeleteUser(id)
 	if err != nil {
-		logger.Error("Init DeleteUser model",err,zap.String("journey","DeleteUser"))
+		logger.Error("error trying delete user model",err,zap.String("jouney","deleteUser"))
 		return err
 	}
 

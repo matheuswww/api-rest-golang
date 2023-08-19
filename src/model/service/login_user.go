@@ -16,7 +16,7 @@ func (ud *userDomainService) LoginUserServices(
 
 	user,err := ud.findUserByEmailAndPassword(userDomain.GetEmail(),userDomain.GetPassword())
 	if err != nil {
-		logger.Error("Init LoginUserServices model",err,zap.String("jouney","LoginUserServices"))
+		logger.Error("error trying login user model",err,zap.String("jouney","loginUserServices"))
 		return nil,"",err
 	}
 

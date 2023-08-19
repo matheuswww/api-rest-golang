@@ -12,7 +12,7 @@ func (ud *userDomainService) UpdateUser(userId string,userDomain model.UserDomai
 
 	err := ud.userRepository.UpdateUser(userId,userDomain)
 	if err != nil {
-		logger.Error("Init UpdateUser model",err,zap.String("jouney","UpdateUser"))
+		logger.Error("error trying update user model",err,zap.String("jouney","updateUser"))
 		return err
 	}
 
