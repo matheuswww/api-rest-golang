@@ -5,7 +5,6 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/matheuswww/api-rest-golang/src/configuration/database/mysql"
 	"github.com/matheuswww/api-rest-golang/src/configuration/logger"
 	"github.com/matheuswww/api-rest-golang/src/configuration/rest_err"
 	"github.com/matheuswww/api-rest-golang/src/model"
@@ -63,21 +62,15 @@ func (ur *userRepository) FindUser(queryType string,value string) (model.UserDom
 }
 
 
-func (us *userRepository) FindUserByEmailAndPassword(email,password string) (model.UserDomainInterface,*rest_err.RestErr) {
+func (ur *userRepository) FindUserByEmailAndPassword(email,password string) (model.UserDomainInterface,*rest_err.RestErr) {
 	logger.Info("Init findUserByEmailAndPassword repository",zap.String("journey","findUserByEmailAndPassword"))
-
-	db,err := mysql.NewMysqlConnection()
-	if err != nil {
-		return nil, rest_err.NewInternalServerError("database error")
-	}
-	defer db.Close()
-
+	db := ur.databaseConnection
 	var retrievedEmail,retrievedPassword,name string
 	var id uint 
 	var age uint8
 	query := "SELECT email,password,name,age,id FROM users WHERE email = ? AND password = ?"
 	row := db.QueryRow(query,email,password)
-	err = row.Scan(&retrievedEmail,&retrievedPassword,&name,&age,&id)
+	err := row.Scan(&retrievedEmail,&retrievedPassword,&name,&age,&id)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil,rest_err.NewNotFoundError("User not found")
