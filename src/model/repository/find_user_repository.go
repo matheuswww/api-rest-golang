@@ -31,13 +31,13 @@ func (ur *userRepository) FindUser(queryType string,value string) (model.UserDom
 			row = db.QueryRow(query,value)
 		default:
 			logger.Error("Error invalid param in FindUser",errors.New("invalid param in function FindUser"),zap.String("journey","FindUser"))
-			return nil,rest_err.NewInternalServerError("database error")
+			return nil,rest_err.NewBadRequestError("invalid param")
 	}
 
 	var retrievedEmail,name,password string
 	var age []uint8
 	var id uint
-	err := row.Scan(&retrievedEmail,&name,&age,&password,&id)
+	err := row.Scan(&retrievedEmail,&password,&name,&age,&id)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil,rest_err.NewNotFoundError("User not found")
