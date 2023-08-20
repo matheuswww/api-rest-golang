@@ -1,8 +1,8 @@
 package view
 
 import (
-	"github.com/virussv/api-rest-golang/src/controller/model/response"
-	"github.com/virussv/api-rest-golang/src/model"
+	"github.com/matheuswww/api-rest-golang/src/controller/model/response"
+	"github.com/matheuswww/api-rest-golang/src/model"
 )
 
 func ConvertDomainToResponse(userDomain model.UserDomainInterface) response.UserResponse{

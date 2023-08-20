@@ -7,7 +7,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
-	"github.com/virussv/api-rest-golang/src/configuration/logger"
+	"github.com/matheuswww/api-rest-golang/src/configuration/logger"
 )
 
 

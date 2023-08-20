@@ -5,9 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/virussv/api-rest-golang/src/configuration/database/mysql"
-	"github.com/virussv/api-rest-golang/src/configuration/logger"
-	"github.com/virussv/api-rest-golang/src/controller/routes"
+	"github.com/matheuswww/api-rest-golang/src/configuration/database/mysql"
+	"github.com/matheuswww/api-rest-golang/src/configuration/logger"
+	"github.com/matheuswww/api-rest-golang/src/controller/routes"
 )
 
 func main() {

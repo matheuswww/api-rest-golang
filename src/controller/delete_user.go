@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 	"github.com/gin-gonic/gin"
-	"github.com/virussv/api-rest-golang/src/configuration/logger"
+	"github.com/matheuswww/api-rest-golang/src/configuration/logger"
 	"go.uber.org/zap"
 )
 

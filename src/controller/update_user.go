@@ -5,10 +5,10 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/virussv/api-rest-golang/src/configuration/logger"
-	"github.com/virussv/api-rest-golang/src/configuration/validation"
-	"github.com/virussv/api-rest-golang/src/controller/model/request"
-	"github.com/virussv/api-rest-golang/src/model"
+	"github.com/matheuswww/api-rest-golang/src/configuration/logger"
+	"github.com/matheuswww/api-rest-golang/src/configuration/validation"
+	"github.com/matheuswww/api-rest-golang/src/controller/model/request"
+	"github.com/matheuswww/api-rest-golang/src/model"
 	"go.uber.org/zap"
 )
 

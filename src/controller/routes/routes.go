@@ -2,8 +2,8 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/virussv/api-rest-golang/src/controller"
-	"github.com/virussv/api-rest-golang/src/model"
+	"github.com/matheuswww/api-rest-golang/src/controller"
+	"github.com/matheuswww/api-rest-golang/src/model"
 )
 
 func InitRouter(r *gin.RouterGroup,userController controller.UserControllerInterface) {

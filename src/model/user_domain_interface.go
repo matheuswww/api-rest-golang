@@ -1,6 +1,6 @@
 package model
 
-import "github.com/virussv/api-rest-golang/src/configuration/rest_err"
+import "github.com/matheuswww/api-rest-golang/src/configuration/rest_err"
 
 type UserDomainInterface interface {
 	GetEmail() string

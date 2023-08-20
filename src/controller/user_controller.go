@@ -2,7 +2,7 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/virussv/api-rest-golang/src/model/service"
+	"github.com/matheuswww/api-rest-golang/src/model/service"
 )
 
 func NewUserControllerInterface (serviceInterface service.UserDomainService) UserControllerInterface {

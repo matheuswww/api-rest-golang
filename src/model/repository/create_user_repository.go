@@ -2,9 +2,9 @@ package repository
 
 import (
 	"errors"
-	"github.com/virussv/api-rest-golang/src/configuration/logger"
-	"github.com/virussv/api-rest-golang/src/configuration/rest_err"
-	"github.com/virussv/api-rest-golang/src/model"
+	"github.com/matheuswww/api-rest-golang/src/configuration/logger"
+	"github.com/matheuswww/api-rest-golang/src/configuration/rest_err"
+	"github.com/matheuswww/api-rest-golang/src/model"
 	"go.uber.org/zap"
 )
 

@@ -3,8 +3,8 @@ package repository
 import (
 	"database/sql"
 
-	"github.com/virussv/api-rest-golang/src/configuration/rest_err"
-	"github.com/virussv/api-rest-golang/src/model"
+	"github.com/matheuswww/api-rest-golang/src/configuration/rest_err"
+	"github.com/matheuswww/api-rest-golang/src/model"
 )
 
 func NewUserRepository(database *sql.DB) UserRepository{

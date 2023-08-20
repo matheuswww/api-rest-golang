@@ -1,9 +1,9 @@
 package service
 
 import (
-	"github.com/virussv/api-rest-golang/src/configuration/rest_err"
-	"github.com/virussv/api-rest-golang/src/model"
-	"github.com/virussv/api-rest-golang/src/model/repository"
+	"github.com/matheuswww/api-rest-golang/src/configuration/rest_err"
+	"github.com/matheuswww/api-rest-golang/src/model"
+	"github.com/matheuswww/api-rest-golang/src/model/repository"
 )
 
 func NewUserDomainService(userRepository repository.UserRepository,) UserDomainService {
